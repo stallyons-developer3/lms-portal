@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import BackButton from '../components/BackButton';
 import PlusIcon from '../components/PlusIcon';
 import notify from '../utils/notify';
-import api from '../api/axios';
+import api, { API_BASE } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
 const AddLesson = () => {
@@ -39,8 +39,8 @@ const AddLesson = () => {
         setDescription(data.description || '');
         setPoints(data.points ?? 10);
         setContent(data.content || '');
-        if (data.videoUrl) setVideoPreview(`http://localhost:5000${data.videoUrl}`);
-        if (data.coverImage) setCoverPreview(`http://localhost:5000${data.coverImage}`);
+        if (data.videoUrl) setVideoPreview(`${API_BASE}${data.videoUrl}`);
+        if (data.coverImage) setCoverPreview(`${API_BASE}${data.coverImage}`);
         if (data.attachmentUrl) setExistingAttachmentUrl(data.attachmentUrl);
       })
       .catch((err) => notify.error(err.response?.data?.message || 'Failed to load lesson'))

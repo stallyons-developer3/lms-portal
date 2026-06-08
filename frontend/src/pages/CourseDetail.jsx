@@ -5,7 +5,7 @@ import PlusIcon from '../components/PlusIcon';
 import EditIcon from '../components/EditIcon';
 import DeleteIcon from '../components/DeleteIcon';
 import notify from '../utils/notify';
-import api from '../api/axios';
+import api, { API_BASE } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
 const PointsIcon = () => (
@@ -180,7 +180,7 @@ const CourseDetail = () => {
                     </td>
                     <td>
                       {l.videoUrl ? (
-                        <a href={`http://localhost:5000${l.videoUrl}`} target="_blank" rel="noreferrer" className="text-link">
+                        <a href={`${API_BASE}${l.videoUrl}`} target="_blank" rel="noreferrer" className="text-link">
                           Watch
                         </a>
                       ) : (

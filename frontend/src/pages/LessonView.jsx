@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import BackButton from '../components/BackButton';
-import api from '../api/axios';
+import api, { API_BASE } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
 const LessonView = () => {
@@ -129,7 +129,7 @@ const LessonView = () => {
           <div className="lesson-video-wrapper">
             <video
               ref={videoRef}
-              src={`http://localhost:5000${lesson.videoUrl}`}
+              src={`${API_BASE}${lesson.videoUrl}`}
               controls
               onEnded={handleVideoEnded}
             />
@@ -173,7 +173,7 @@ const LessonView = () => {
         <div className="lesson-view-card">
           <div className="lesson-section-title">Attachment</div>
           <a
-            href={`http://localhost:5000${lesson.attachmentUrl}`}
+            href={`${API_BASE}${lesson.attachmentUrl}`}
             target="_blank"
             rel="noreferrer"
             className="attachment-download"

@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import BackButton from '../components/BackButton';
 import SaveIcon from '../components/SaveIcon';
 import notify from '../utils/notify';
-import api from '../api/axios';
+import api, { API_BASE } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
 const AddCourse = () => {
@@ -48,7 +48,7 @@ const AddCourse = () => {
         const classIds = (data.classes || []).map((c) => (typeof c === 'object' ? c._id : c));
         setSelectedClasses(classIds);
         if (data.coverImage) {
-          setCoverPreview(`http://localhost:5000${data.coverImage}`);
+          setCoverPreview(`${API_BASE}${data.coverImage}`);
         }
       })
       .catch((err) => {

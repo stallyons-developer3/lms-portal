@@ -7,7 +7,7 @@ import DeleteIcon from '../../components/DeleteIcon';
 import Pagination from '../../components/Pagination';
 import usePagination from '../../hooks/usePagination';
 import notify from '../../utils/notify';
-import api from '../../api/axios';
+import api, { API_BASE } from '../../api/axios';
 
 const cardGradients = [
   'linear-gradient(135deg, #2c5364 0%, #203a43 50%, #0f2027 100%)',
@@ -137,7 +137,7 @@ const CoursesManagement = () => {
                 }
               >
                 {c.coverImage ? (
-                  <img src={`http://localhost:5000${c.coverImage}`} alt={c.title} />
+                  <img src={`${API_BASE}${c.coverImage}`} alt={c.title} />
                 ) : (
                   cardEmojis[i % cardEmojis.length]
                 )}
