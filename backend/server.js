@@ -32,6 +32,16 @@ app.get('/', (req, res) => {
   res.json({ message: 'LMS API is running' });
 });
 
+app.get('/api/ping', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Pong! Backend is working perfectly 🎉',
+    timestamp: new Date().toISOString(),
+    server: 'Vercel Serverless',
+    project: 'LMS Portal',
+  });
+});
+
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/courses', require('./routes/courseRoutes'));
