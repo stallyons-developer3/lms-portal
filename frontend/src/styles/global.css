@@ -857,6 +857,38 @@ body {
 }
 
 /* ============= COURSE CARDS GRID ============= */
+.cards-scroll-wrapper {
+  max-height: calc(100vh - 175px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  padding-bottom: 4px;
+}
+
+.cards-scroll-wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.cards-scroll-wrapper::-webkit-scrollbar-track {
+  background: rgba(1, 121, 135, 0.08);
+  border-radius: 10px;
+}
+
+.cards-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 10px;
+  border: 2px solid rgba(1, 121, 135, 0.08);
+}
+
+.cards-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.cards-scroll-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) rgba(1, 121, 135, 0.08);
+}
+
 .courses-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

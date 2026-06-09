@@ -113,6 +113,7 @@ const MyCourses = () => {
           </div>
         </div>
       ) : (
+        <div className="cards-scroll-wrapper">
         <div className="courses-grid">
           {paginated.map((c, i) => (
             <div
@@ -176,6 +177,7 @@ const MyCourses = () => {
               </div>
             </div>
           ))}
+        </div>
         </div>
       )}
       <Pagination
