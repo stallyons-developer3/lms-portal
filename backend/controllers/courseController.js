@@ -104,9 +104,7 @@ const createCourse = async (req, res) => {
       teacherId = t._id;
     }
 
-    const coverImage = req.files?.coverImage?.[0]
-      ? `/uploads/${req.files.coverImage[0].filename}`
-      : '';
+    const coverImage = req.files?.coverImage?.[0]?.path || '';
 
     const course = await Course.create({
       title,
@@ -155,7 +153,7 @@ const updateCourse = async (req, res) => {
       if (Array.isArray(classes)) course.classes = classes;
     }
     if (req.files?.coverImage?.[0]) {
-      course.coverImage = `/uploads/${req.files.coverImage[0].filename}`;
+      course.coverImage = req.files.coverImage[0].path;
     }
 
     await course.save();

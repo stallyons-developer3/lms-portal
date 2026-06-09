@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import SearchIcon from '../../components/SearchIcon';
 import Pagination from '../../components/Pagination';
 import usePagination from '../../hooks/usePagination';
-import api, { API_BASE } from '../../api/axios';
+import api, { fileUrl } from '../../api/axios';
 
 const cardGradients = [
   'linear-gradient(135deg, #2c5364 0%, #203a43 50%, #0f2027 100%)',
@@ -96,7 +96,7 @@ const MyCourses = () => {
                 }
               >
                 {c.coverImage ? (
-                  <img src={`${API_BASE}${c.coverImage}`} alt={c.title} />
+                  <img src={fileUrl(c.coverImage)} alt={c.title} />
                 ) : (
                   cardEmojis[i % cardEmojis.length]
                 )}

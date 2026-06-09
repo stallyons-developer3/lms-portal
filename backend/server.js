@@ -49,6 +49,22 @@ app.use('/api/lessons', require('./routes/lessonRoutes'));
 app.use('/api/classes', require('./routes/classRoutes'));
 app.use('/api/quizzes', require('./routes/quizRoutes'));
 
+app.use((err, req, res, next) => {
+  console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.error('❌ GLOBAL ERROR HANDLER');
+  console.error('Message:', err?.message);
+  console.error('Name:', err?.name);
+  console.error('Stack:', err?.stack);
+  console.error('Full:', JSON.stringify(err, Object.getOwnPropertyNames(err || {}), 2));
+  console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const status = err?.status || err?.statusCode || 500;
+  res.status(status).json({
+    message: err?.message || 'Server error',
+    name: err?.name,
+    code: err?.code,
+  });
+});
+
 if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {

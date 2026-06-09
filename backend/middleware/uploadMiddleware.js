@@ -1,25 +1,32 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('../config/cloudinary');
 
-const uploadDir = path.join(__dirname, '..', 'uploads');
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: async (req, file) => {
+    let resource_type = 'auto';
+    let folder = 'lms-portal';
 
-try {
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-  }
-} catch (err) {
-  console.log('[upload] skipping uploads dir creation (read-only fs):', err.code);
-}
+    if (file.fieldname === 'video') {
+      resource_type = 'video';
+      folder = 'lms-portal/videos';
+    } else if (file.fieldname === 'coverImage') {
+      resource_type = 'image';
+      folder = 'lms-portal/covers';
+    } else if (file.fieldname === 'attachment') {
+      resource_type = 'raw';
+      folder = 'lms-portal/attachments';
+    } else if (file.fieldname === 'document') {
+      resource_type = 'raw';
+      folder = 'lms-portal/documents';
+    }
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname);
-    cb(null, `${file.fieldname}-${unique}${ext}`);
+    return {
+      folder,
+      resource_type,
+      public_id: `${file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}`,
+    };
   },
 });
 

@@ -9,7 +9,7 @@ import DeleteIcon from '../components/DeleteIcon';
 import Pagination from '../components/Pagination';
 import usePagination from '../hooks/usePagination';
 import notify from '../utils/notify';
-import api, { API_BASE } from '../api/axios';
+import api, { fileUrl } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
 const cardGradients = [
@@ -168,7 +168,7 @@ const LessonsList = () => {
                 }
               >
                 {l.coverImage ? (
-                  <img src={`${API_BASE}${l.coverImage}`} alt={l.title} />
+                  <img src={fileUrl(l.coverImage)} alt={l.title} />
                 ) : (
                   cardEmojis[i % cardEmojis.length]
                 )}
@@ -287,7 +287,7 @@ const LessonsList = () => {
               {contentModal.attachmentUrl && (
                 <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid var(--border)' }}>
                   <a
-                    href={`${API_BASE}${contentModal.attachmentUrl}`}
+                    href={fileUrl(contentModal.attachmentUrl)}
                     target="_blank"
                     rel="noreferrer"
                     className="btn btn-primary"

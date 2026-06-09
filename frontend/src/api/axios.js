@@ -2,6 +2,12 @@ import axios from 'axios';
 
 export const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+export const fileUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  return `${API_BASE}${url}`;
+};
+
 const api = axios.create({
   baseURL: `${API_BASE}/api`,
 });

@@ -124,13 +124,9 @@ const createLesson = async (req, res) => {
     const lastLesson = await Lesson.findOne({ course: courseId }).sort({ order: -1 });
     const nextOrder = lastLesson ? lastLesson.order + 1 : 1;
 
-    const videoUrl = req.files?.video?.[0] ? `/uploads/${req.files.video[0].filename}` : '';
-    const attachmentUrl = req.files?.attachment?.[0]
-      ? `/uploads/${req.files.attachment[0].filename}`
-      : '';
-    const coverImage = req.files?.coverImage?.[0]
-      ? `/uploads/${req.files.coverImage[0].filename}`
-      : '';
+    const videoUrl = req.files?.video?.[0]?.path || '';
+    const attachmentUrl = req.files?.attachment?.[0]?.path || '';
+    const coverImage = req.files?.coverImage?.[0]?.path || '';
 
     const lesson = await Lesson.create({
       title,
@@ -166,9 +162,9 @@ const updateLesson = async (req, res) => {
     if (content !== undefined) lesson.content = content;
     if (points !== undefined) lesson.points = Number(points);
 
-    if (req.files?.video?.[0]) lesson.videoUrl = `/uploads/${req.files.video[0].filename}`;
-    if (req.files?.attachment?.[0]) lesson.attachmentUrl = `/uploads/${req.files.attachment[0].filename}`;
-    if (req.files?.coverImage?.[0]) lesson.coverImage = `/uploads/${req.files.coverImage[0].filename}`;
+    if (req.files?.video?.[0]) lesson.videoUrl = req.files.video[0].path;
+    if (req.files?.attachment?.[0]) lesson.attachmentUrl = req.files.attachment[0].path;
+    if (req.files?.coverImage?.[0]) lesson.coverImage = req.files.coverImage[0].path;
 
     await lesson.save();
     res.json(formatLesson(lesson, req.user._id, req.user.role));

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api, { API_BASE } from '../api/axios';
+import api, { fileUrl } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
 const fallbackEmojis = ['🎨', '🎵', '🎯', '📚', '🎓', '🧮'];
@@ -49,7 +49,7 @@ const OptionalCoursesPanel = () => {
           >
             {c.coverImage ? (
               <img
-                src={`${API_BASE}${c.coverImage}`}
+                src={fileUrl(c.coverImage)}
                 alt={c.title}
                 style={{
                   width: 40,
