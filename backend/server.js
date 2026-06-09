@@ -35,7 +35,11 @@ app.use('/api/lessons', require('./routes/lessonRoutes'));
 app.use('/api/classes', require('./routes/classRoutes'));
 app.use('/api/quizzes', require('./routes/quizRoutes'));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
