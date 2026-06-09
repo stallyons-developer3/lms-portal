@@ -3,6 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 
+console.log('=================================');
+console.log('🚀 server.js LOADED successfully!');
+console.log('=================================');
+
 const app = express();
 
 connectDB();
