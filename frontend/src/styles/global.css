@@ -858,7 +858,7 @@ body {
 
 /* ============= COURSE CARDS GRID ============= */
 .cards-scroll-wrapper {
-  max-height: calc(100vh - 175px);
+  max-height: calc(100vh - 124px);
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 8px;
